@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/features/auth/screens/auth_screen.dart';
-import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:flutter_amazon_clone/router.dart';
 import 'package:flutter_amazon_clone/services/auth_service.dart';
@@ -45,7 +45,7 @@ class _MainAppState extends State<MainApp> {
               elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const HomeScreen()
+          ? const BottomBar()
           : const AuthScreen(),
     );
   }
