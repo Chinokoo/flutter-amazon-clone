@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/address_box.dart';
+import 'package:flutter_amazon_clone/features/screens/home/widgets/carousel_image.dart';
+import 'package:flutter_amazon_clone/features/screens/home/widgets/deal_of_the_day.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/top_categories.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -91,6 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
           const TopCategories(),
           //sized box for spacing
           const SizedBox(height: 10),
+          //carousel image
+          const CarouselImage(),
+          //sized box for spacing
+          const SizedBox(height: 10),
+          //deal of the day.
+          const DealOfTheDay(),
 
           Center(
             child: Text(
