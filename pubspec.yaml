@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   badges: ^3.1.2
+  carousel_slider: ^5.0.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.2.1
@@ -16,9 +17,9 @@ dependencies:
   shared_preferences: ^2.3.3
 
 dev_dependencies:
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true

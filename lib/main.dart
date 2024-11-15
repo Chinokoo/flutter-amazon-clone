@@ -10,9 +10,14 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => UserProvider()),
-  ], child: const MainApp()));
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+      ],
+      child: MaterialApp(
+        scaffoldMessengerKey: GlobalKey<ScaffoldMessengerState>(),
+        home: const MainApp(),
+      )));
 }
 
 class MainApp extends StatefulWidget {

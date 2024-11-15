@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+//hide your uri key in .env file
 String uri = dotenv.env['MYURI'] ?? "";
 
 class GlobalVariables {
@@ -26,5 +27,15 @@ class GlobalVariables {
     'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/AdvantagePrime/BAU/14thJan/D37196025_IN_WL_AdvantageJustforPrime_Jan_Mob_ingress-banner_1242x450.jpg',
     'https://images-na.ssl-images-amazon.com/images/G/31/Symbol/2020/00NEW/1242_450Banners/PL31_copy._CB432483346_.jpg',
     'https://images-na.ssl-images-amazon.com/images/G/31/img21/shoes/September/SSW/pc-header._CB641971330_.jpg',
+  ];
+
+  //list for categories in the home page
+  static const List<Map<String, String>> categoryImages = [
+    {"title": "Mobiles", "image": "assets/images/mobiles.jpeg"},
+    {"title": "Essentials", "image": "assets/images/essentials.jpeg"},
+    {"title": "Books", "image": "assets/images/books.jpeg"},
+    {"title": "Fashion", "image": "assets/images/fashion.jpeg"},
+    {"title": "Electronics", "image": "assets/images/electronics.jpeg"},
+    {"title": "Appliances", "image": "assets/images/appliances.jpeg"}
   ];
 }

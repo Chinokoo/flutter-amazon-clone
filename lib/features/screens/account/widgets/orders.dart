@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/features/screens/account/widgets/single_product.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});
@@ -40,11 +41,14 @@ class _OrdersState extends State<Orders> {
         Container(
           height: 170,
           padding: const EdgeInsets.only(left: 10, top: 20, right: 0),
-          //TODO:display orders here.
-          // child: ListView.builder(
-          //   itemCount: 4,
-          //   itemBuilder: (context, index){},
-          // ),
+          //TODO:connect to the api to get the orders data.
+          child: ListView.builder(
+            itemCount: 4,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return SingleProduct();
+            },
+          ),
         )
       ],
     );

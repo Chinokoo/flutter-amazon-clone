@@ -9,7 +9,7 @@ class User {
   final String address;
   final String type;
   final String token;
-
+  //Constructor with named parameters
   User(
       {required this.id,
       required this.name,
@@ -19,6 +19,7 @@ class User {
       required this.type,
       required this.token});
 
+  // convert user object to map data
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
@@ -31,6 +32,7 @@ class User {
     };
   }
 
+  // factory constructor to create user from map data
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['_id'] as String,
@@ -43,8 +45,10 @@ class User {
     );
   }
 
+  // convert user object to json string
   String toJson() => json.encode(toMap());
 
+  // factory constructor to create user from json data
   factory User.fromJson(String source) =>
       User.fromMap(json.decode(source) as Map<String, dynamic>);
 }
