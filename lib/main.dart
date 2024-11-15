@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/features/admin/screens/admin_bottom_nav_bar/admin_bottom_nav_bar.dart';
 import 'package:flutter_amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:flutter_amazon_clone/router.dart';
@@ -52,7 +53,7 @@ class _MainAppState extends State<MainApp> {
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == "user"
               ? const BottomBar()
-              : const AdminScreen()
+              : const AdminBottomNavBar()
           : const AuthScreen(),
     );
   }
