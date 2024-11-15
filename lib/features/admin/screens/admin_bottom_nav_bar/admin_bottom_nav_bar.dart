@@ -57,7 +57,7 @@ class _AdminBottomNavBarState extends State<AdminBottomNavBar> {
                 ),
                 child: const Icon(Icons.post_add_sharp),
               ),
-              label: "Posts"),
+              label: "Products"),
 
           // Account Page
           BottomNavigationBarItem(
@@ -98,7 +98,7 @@ class _AdminBottomNavBarState extends State<AdminBottomNavBar> {
                           width: bottomBarBorderWidth),
                     ),
                   ),
-                  child: const Icon(Icons.border_outer_rounded),
+                  child: const Icon(Icons.warehouse),
                 ),
               ),
               label: "Orders"),

@@ -41,6 +41,22 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       body: Center(
         child: Text("Admin Home Screen"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: "Add a Product",
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: const Icon(
+            Icons.add,
+            color: GlobalVariables.backgroundColor,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
