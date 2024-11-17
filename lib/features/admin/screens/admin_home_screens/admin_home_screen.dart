@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/features/admin/screens/admin_add_products_screen/admin_add_products.dart';
 
 class AdminHomeScreen extends StatefulWidget {
   const AdminHomeScreen({super.key});
@@ -11,6 +12,11 @@ class AdminHomeScreen extends StatefulWidget {
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //navigating to the add products page.
+    void navigateToAddProductsScreen() {
+      Navigator.pushNamed(context, AdminAddProducts.routName);
+    }
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(50),
@@ -42,7 +48,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         child: Text("Admin Home Screen"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: navigateToAddProductsScreen,
         tooltip: "Add a Product",
         child: Container(
           width: double.infinity,

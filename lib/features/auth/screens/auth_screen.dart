@@ -63,129 +63,131 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundColor,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // auth title
-            const Text(
-              'Welcome to Amazon Clone',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-            ),
-            //sized box for spacing
+          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // auth title
+              const Text(
+                'Welcome to Amazon Clone',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+              //sized box for spacing
 
-            //radio button for sign in or sign up
-            ListTile(
-              tileColor: _auth == Auth.signup
-                  ? GlobalVariables.backgroundColor
-                  : GlobalVariables.greyBackgroundColor,
-              title: const Text(
-                'Create an Account',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              //radio button for sign in or sign up
+              ListTile(
+                tileColor: _auth == Auth.signup
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundColor,
+                title: const Text(
+                  'Create an Account',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signup,
+                  groupValue: _auth,
+                  onChanged: (Auth? value) {
+                    setState(() {
+                      _auth = value!;
+                    });
+                  },
+                ),
               ),
-              leading: Radio(
-                activeColor: GlobalVariables.secondaryColor,
-                value: Auth.signup,
-                groupValue: _auth,
-                onChanged: (Auth? value) {
-                  setState(() {
-                    _auth = value!;
-                  });
-                },
-              ),
-            ),
-            //sign up form
-            if (_auth == Auth.signup)
-              Form(
-                  key: _signUpFormKey,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: GlobalVariables.backgroundColor,
-                    child: Column(
-                      children: [
-                        CustomTextfield(
-                          obscureText: false,
-                          controller: _nameController,
-                          hintText: "Name",
-                        ),
-                        //sized box for spacing
-                        const SizedBox(height: 10),
-                        CustomTextfield(
+              //sign up form
+              if (_auth == Auth.signup)
+                Form(
+                    key: _signUpFormKey,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: GlobalVariables.backgroundColor,
+                      child: Column(
+                        children: [
+                          CustomTextfield(
                             obscureText: false,
-                            controller: _emailController,
-                            hintText: "Email"),
-                        //sized box for spacing
-                        const SizedBox(height: 10),
-                        CustomTextfield(
-                            obscureText: true,
-                            controller: _passwordController,
-                            hintText: "Password"),
-                        //sized box for spacing
-                        const SizedBox(height: 10),
-                        CustomButton(
-                            text: "Sign Up",
-                            onTap: () {
-                              if (_signUpFormKey.currentState!.validate()) {
-                                signUpUser();
-                              }
-                            }),
-                      ],
-                    ),
-                  )),
+                            controller: _nameController,
+                            hintText: "Name",
+                          ),
+                          //sized box for spacing
+                          const SizedBox(height: 10),
+                          CustomTextfield(
+                              obscureText: false,
+                              controller: _emailController,
+                              hintText: "Email"),
+                          //sized box for spacing
+                          const SizedBox(height: 10),
+                          CustomTextfield(
+                              obscureText: true,
+                              controller: _passwordController,
+                              hintText: "Password"),
+                          //sized box for spacing
+                          const SizedBox(height: 10),
+                          CustomButton(
+                              text: "Sign Up",
+                              onTap: () {
+                                if (_signUpFormKey.currentState!.validate()) {
+                                  signUpUser();
+                                }
+                              }),
+                        ],
+                      ),
+                    )),
 
-            //radio button for sign up
-            ListTile(
-              tileColor: _auth == Auth.signin
-                  ? GlobalVariables.backgroundColor
-                  : GlobalVariables.greyBackgroundColor,
-              title: const Text(
-                'Sign in to your Account',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              //radio button for sign up
+              ListTile(
+                tileColor: _auth == Auth.signin
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundColor,
+                title: const Text(
+                  'Sign in to your Account',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signin,
+                  groupValue: _auth,
+                  onChanged: (Auth? value) {
+                    setState(() {
+                      _auth = value!;
+                    });
+                  },
+                ),
               ),
-              leading: Radio(
-                activeColor: GlobalVariables.secondaryColor,
-                value: Auth.signin,
-                groupValue: _auth,
-                onChanged: (Auth? value) {
-                  setState(() {
-                    _auth = value!;
-                  });
-                },
-              ),
-            ),
-            //sign in form
-            if (_auth == Auth.signin)
-              Form(
-                  key: _signInFormKey,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: GlobalVariables.backgroundColor,
-                    child: Column(
-                      children: [
-                        CustomTextfield(
-                            obscureText: false,
-                            controller: _emailController,
-                            hintText: "Email"),
-                        //sized box for spacing
-                        const SizedBox(height: 10),
-                        CustomTextfield(
-                            obscureText: true,
-                            controller: _passwordController,
-                            hintText: "Password"),
-                        //sized box for spacing
-                        const SizedBox(height: 10),
-                        CustomButton(
-                            text: "Sign In",
-                            onTap: () {
-                              if (_signInFormKey.currentState!.validate()) {
-                                signInUser();
-                              }
-                            }),
-                      ],
-                    ),
-                  )),
-          ],
+              //sign in form
+              if (_auth == Auth.signin)
+                Form(
+                    key: _signInFormKey,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: GlobalVariables.backgroundColor,
+                      child: Column(
+                        children: [
+                          CustomTextfield(
+                              obscureText: false,
+                              controller: _emailController,
+                              hintText: "Email"),
+                          //sized box for spacing
+                          const SizedBox(height: 10),
+                          CustomTextfield(
+                              obscureText: true,
+                              controller: _passwordController,
+                              hintText: "Password"),
+                          //sized box for spacing
+                          const SizedBox(height: 10),
+                          CustomButton(
+                              text: "Sign In",
+                              onTap: () {
+                                if (_signInFormKey.currentState!.validate()) {
+                                  signInUser();
+                                }
+                              }),
+                        ],
+                      ),
+                    )),
+            ],
+          ),
         ),
       )),
     );

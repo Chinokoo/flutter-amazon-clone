@@ -77,10 +77,9 @@ class AuthService {
             await prefs.setString(
                 "x-auth-token", jsonDecode(response.body)["token"]);
             //Navigating to the home screen
-            Navigator.pushNamedAndRemoveUntil(
+            Navigator.pushNamed(
               context,
               BottomBar.routeName,
-              (route) => false,
             );
           });
     } catch (e) {
