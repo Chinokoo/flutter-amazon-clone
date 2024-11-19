@@ -26,6 +26,7 @@ const upload = multer({ storage: Storage });
 //middleware
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+
 app.use(authRouter);
 app.use(productRouter);
 app.use(upload.array("image", 4));

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SingleProduct extends StatelessWidget {
-  const SingleProduct({super.key});
+  final String? image;
+  const SingleProduct({super.key, this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,8 @@ class SingleProduct extends StatelessWidget {
           child: Container(
             width: 180,
             padding: EdgeInsets.all(10),
-            child: Image.asset(
-              "assets/images/mobiles.jpeg",
+            child: Image.network(
+              image!,
               fit: BoxFit.fitHeight,
               width: 180,
             ),

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -60,6 +61,66 @@ class AdminServices {
                 snakBarColor: Colors.green);
             Navigator.pop(context);
           });
+    } catch (e) {
+      showSnackBar(
+          context: context, text: e.toString(), snakBarColor: Colors.red);
+    }
+  }
+
+  //getting all the products
+  Future<List<Product>> fetchAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context).user;
+    List<Product> productList = [];
+    try {
+      // get response
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/products'), headers: {
+        "Content-Type": 'application/json; charset=UTF-8',
+        "x-auth-token": userProvider.token,
+      });
+      //if response is success
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            //! what on earth is this?
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              productList.add(
+                Product.fromJson(
+                  jsonEncode(jsonDecode(res.body)[i]),
+                ),
+              );
+            }
+          });
+    } catch (e) {
+      showSnackBar(
+          context: context, text: e.toString(), snakBarColor: Colors.red);
+    }
+    return productList;
+  }
+
+  //deleting a product
+  void deleteProduct(
+      {required BuildContext context,
+      required VoidCallback onSuccess,
+      required Product product}) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false).user;
+    try {
+      http.Response res =
+          await http.post(Uri.parse('$uri/admin/delete-product'),
+              headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'x-auth-token': userProvider.token
+              },
+              body: jsonEncode({
+                "id": product.id,
+              }));
+      //if response is success
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: onSuccess,
+      );
     } catch (e) {
       showSnackBar(
           context: context, text: e.toString(), snakBarColor: Colors.red);

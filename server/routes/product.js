@@ -8,7 +8,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "image_uploads/");
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -27,8 +27,6 @@ productRouter.post(
       //getting the files from the request
       const files = req.files;
 
-      const seller = req.header("x-auth-token");
-
       const fileUrls = files.map(
         (file) =>
           `${req.protocol}://${req.get("host")}/uploads/${file.filename}`
@@ -41,7 +39,6 @@ productRouter.post(
         quantity: req.body.quantity,
         category: req.body.category,
         images: fileUrls,
-        seller: seller.name,
       });
       //saving the product to the db
       const savedProduct = await product.save();
@@ -53,4 +50,24 @@ productRouter.post(
   }
 );
 
+//getting the products
+productRouter.get("/admin/products", admin, async (req, res) => {
+  try {
+    const products = await Product.find({ id: req.header.id });
+    res.json(products);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//deleting a  product
+productRouter.post("/admin/delete-product", admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let product = await Product.findByIdAndDelete(id);
+    res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 module.exports = productRouter;
