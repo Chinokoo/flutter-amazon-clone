@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter_amazon_clone/features/admin/screens/admin_add_products_screen/admin_add_products.dart';
 import 'package:flutter_amazon_clone/features/auth/screens/auth_screen.dart';
+import 'package:flutter_amazon_clone/features/screens/home/category_deals_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
+import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -19,10 +21,28 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case HomeScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const HomeScreen());
+    //category screen navigator
+    case CategoryDealsScreen.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => CategoryDealsScreen(
+                category: category,
+              ));
+
     //admin add products screen
     case AdminAddProducts.routName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const AdminAddProducts());
+    //search page
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => SearchScreen(
+                searchQuery: searchQuery,
+              ));
+
     //default route
     default:
       return MaterialPageRoute(

@@ -4,6 +4,7 @@ import 'package:flutter_amazon_clone/features/screens/home/widgets/address_box.d
 import 'package:flutter_amazon_clone/features/screens/home/widgets/carousel_image.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/deal_of_the_day.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/top_categories.dart';
+import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //function to navigate to search screen
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -38,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(7),
                       elevation: 1,
                       child: TextFormField(
+                        onFieldSubmitted: navigateToSearchScreen,
                         decoration: InputDecoration(
                             prefixIcon: InkWell(
                               onTap: () {},
@@ -83,29 +90,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )),
       ),
-      body: Column(
-        children: [
-          //address box widget
-          const AddressBox(),
-          //sized box for spacing
-          const SizedBox(height: 10),
-          //top categories
-          const TopCategories(),
-          //sized box for spacing
-          const SizedBox(height: 10),
-          //carousel image
-          const CarouselImage(),
-          //sized box for spacing
-          const SizedBox(height: 10),
-          //deal of the day.
-          const DealOfTheDay(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //address box widget
+            const AddressBox(),
+            //sized box for spacing
+            const SizedBox(height: 10),
+            //top categories
+            const TopCategories(),
+            //sized box for spacing
+            const SizedBox(height: 10),
+            //carousel image
+            const CarouselImage(),
+            //sized box for spacing
+            const SizedBox(height: 10),
+            //deal of the day.
+            const DealOfTheDay(),
 
-          Center(
-            child: Text(
-              user.toJson(),
+            Center(
+              child: Text(
+                user.toJson(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

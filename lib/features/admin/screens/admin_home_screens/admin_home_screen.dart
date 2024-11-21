@@ -101,91 +101,96 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : Scaffold(
-            appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(50),
-                child: AppBar(
-                  flexibleSpace: Container(
-                    decoration: const BoxDecoration(
-                        gradient: GlobalVariables.appBarGradient),
-                  ),
-                  title: Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Image.asset(
-                          'assets/images/amazon_in.png',
-                          width: 120,
-                          height: 45,
-                          color: Colors.black,
-                        ),
+        : products!.isEmpty
+            ? Center(
+                child: Text("Products List is Empty."),
+              )
+            : Scaffold(
+                appBar: PreferredSize(
+                    preferredSize: const Size.fromHeight(50),
+                    child: AppBar(
+                      flexibleSpace: Container(
+                        decoration: const BoxDecoration(
+                            gradient: GlobalVariables.appBarGradient),
                       ),
-                      const Spacer(),
-                      const Text(
-                        "Admin",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )),
-            body: GridView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(top: 5, left: 5),
-                itemCount: products!.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final productData = products![index];
-                  return Column(children: [
-                    SizedBox(
-                        height: 140,
-                        child: SingleProduct(
-                          image: productData.images[0],
-                        )),
-                    Container(
-                      height: 30,
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      title: Row(
                         children: [
-                          Expanded(
-                            child: Text(
-                              productData.name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Image.asset(
+                              'assets/images/amazon_in.png',
+                              width: 120,
+                              height: 45,
+                              color: Colors.black,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () =>
-                                showDeleteDialog(productData, index),
-                            icon: Icon(
-                              Icons.delete,
-                              size: 18,
-                              color: Colors.grey[500],
-                            ),
+                          const Spacer(),
+                          const Text(
+                            "Admin",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
-                    )
-                  ]);
-                }),
-            floatingActionButton: FloatingActionButton(
-              onPressed: navigateToAddProductsScreen,
-              tooltip: "Add a Product",
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                    gradient: GlobalVariables.appBarGradient,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Icon(
-                  Icons.add,
-                  color: GlobalVariables.backgroundColor,
+                    )),
+                body: GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(top: 5, left: 5),
+                    itemCount: products!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      final productData = products![index];
+                      return Column(children: [
+                        SizedBox(
+                            height: 140,
+                            child: SingleProduct(
+                              image: productData.images[0],
+                            )),
+                        Container(
+                          height: 30,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  productData.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () =>
+                                    showDeleteDialog(productData, index),
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 18,
+                                  color: Colors.grey[500],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ]);
+                    }),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: navigateToAddProductsScreen,
+                  tooltip: "Add a Product",
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                        gradient: GlobalVariables.appBarGradient,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: const Icon(
+                      Icons.add,
+                      color: GlobalVariables.backgroundColor,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-          );
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerFloat,
+              );
   }
 }

@@ -1,6 +1,7 @@
 const express = require("express");
 productRouter = express.Router();
 const Product = require("../models/product");
+const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const multer = require("multer");
 const path = require("path");
@@ -61,11 +62,36 @@ productRouter.get("/admin/products", admin, async (req, res) => {
 });
 
 //deleting a  product
-productRouter.post("/admin/delete-product", admin, async (req, res) => {
+productRouter.delete("/admin/delete-product", admin, async (req, res) => {
   try {
     const { id } = req.body;
-    let product = await Product.findByIdAndDelete(id);
+    const product = await Product.findByIdAndDelete(id);
     res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//get  products by category
+productRouter.get("/api/products", auth, async (req, res) => {
+  try {
+    const products = await Product.find({ category: req.query.category });
+    if (!products) res.status(400).json({ msg: "Category not found" });
+
+    res.json(products);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//get the searched products
+productRouter.get("/api/products/search/:name", auth, async (req, res) => {
+  try {
+    const products = await Product.find({
+      name: { $regex: req.params.name, $options: "i" },
+    });
+    if (!products) res.status(400).json({ msg: "product is not available" });
+    res.json(products);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
