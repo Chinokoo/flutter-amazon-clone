@@ -22,13 +22,15 @@ class AuthService {
     try {
       //code to sign up the user
       User user = User(
-          id: "",
-          name: name,
-          email: email,
-          password: password,
-          address: "",
-          type: "",
-          token: "");
+        id: "",
+        name: name,
+        email: email,
+        password: password,
+        address: "",
+        type: "",
+        token: "",
+        cart: [],
+      );
       //sending an http post request to the server to sign up the user
       http.Response response = await http.post(Uri.parse('$uri/api/signup'),
           body: user.toJson(),
@@ -94,16 +96,17 @@ class AuthService {
       //creating an shared preference instance
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString("x-auth-token");
-      //checking if the token is null or not
+      //checking if the token is null or empty
       if (token == null || token.isEmpty) {
         prefs.setString("x-auth-token", "");
+        return;
       }
 
       var tokenResponse = await http.post(
         Uri.parse('$uri/tokenIsValid'),
         headers: <String, String>{
           "Content-Type": "application/json; charset=UTF-8",
-          'x-auth-token': token!
+          'x-auth-token': token
         },
       );
 

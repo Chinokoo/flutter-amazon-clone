@@ -7,6 +7,7 @@ const app = express();
 
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
+const userRouter = require("./routes/user");
 
 //configuring multer for file storage.
 const Storage = multer.diskStorage({
@@ -29,6 +30,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.use(authRouter);
 app.use(productRouter);
+app.use(userRouter);
 app.use(upload.array("image", 4));
 
 //const mongoPassword = "peterchinokoo"

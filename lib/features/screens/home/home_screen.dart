@@ -90,29 +90,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             //address box widget
-            const AddressBox(),
+            AddressBox(),
             //sized box for spacing
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             //top categories
-            const TopCategories(),
+            TopCategories(),
             //sized box for spacing
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             //carousel image
-            const CarouselImage(),
+            CarouselImage(),
             //sized box for spacing
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             //deal of the day.
-            const DealOfTheDay(),
-
-            Center(
-              child: Text(
-                user.toJson(),
-              ),
-            ),
+            DealOfTheDay(),
           ],
         ),
       ),

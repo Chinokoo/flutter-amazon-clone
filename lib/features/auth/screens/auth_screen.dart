@@ -74,7 +74,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 'Welcome to Amazon Clone',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
-              //sized box for spacing
 
               //radio button for sign in or sign up
               ListTile(

@@ -9,15 +9,18 @@ class User {
   final String address;
   final String type;
   final String token;
+  final List<dynamic> cart;
   //Constructor with named parameters
-  User(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.password,
-      required this.address,
-      required this.type,
-      required this.token});
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.password,
+    required this.address,
+    required this.type,
+    required this.token,
+    required this.cart,
+  });
 
   // convert user object to map data
   Map<String, dynamic> toMap() {
@@ -29,20 +32,23 @@ class User {
       'address': address,
       'type': type,
       'token': token,
+      'cart': cart
     };
   }
 
   // factory constructor to create user from map data
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      password: map['password'] as String,
-      address: map['address'] as String,
-      type: map['type'] as String,
-      token: map['token'] as String,
-    );
+        id: map['_id'] as String,
+        name: map['name'] as String,
+        email: map['email'] as String,
+        password: map['password'] as String,
+        address: map['address'] as String,
+        type: map['type'] as String,
+        token: map['token'] as String,
+        cart: List<Map<String, dynamic>>.from(map['cart']?.map(
+          (x) => Map<String, dynamic>.from(x),
+        )));
   }
 
   // convert user object to json string

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
+import 'package:flutter_amazon_clone/features/admin/models/product_model.dart';
 import 'package:flutter_amazon_clone/features/admin/screens/admin_add_products_screen/admin_add_products.dart';
 import 'package:flutter_amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/category_deals_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
+import 'package:flutter_amazon_clone/features/screens/product/screens/product_details.dart';
 import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -41,6 +43,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           settings: routeSettings,
           builder: (_) => SearchScreen(
                 searchQuery: searchQuery,
+              ));
+    //product details page
+    case ProductDetails.routeName:
+      var product = routeSettings.arguments as Product;
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => ProductDetails(
+                product: product,
               ));
 
     //default route

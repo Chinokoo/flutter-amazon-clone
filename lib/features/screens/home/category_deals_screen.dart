@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/features/admin/models/product_model.dart';
+import 'package:flutter_amazon_clone/features/screens/product/screens/product_details.dart';
 import 'package:flutter_amazon_clone/services/home_Service.dart';
 
 class CategoryDealsScreen extends StatefulWidget {
@@ -58,7 +59,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
             ),
           ),
           products == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : products!.isEmpty
@@ -78,31 +79,39 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                                   mainAxisSpacing: 10),
                           itemBuilder: (context, index) {
                             final product = products![index];
-                            return Column(
-                              children: [
-                                SizedBox(
-                                  height: 130,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black12, width: 0.5)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Image.network(product.images[0]),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ProductDetails.routeName,
+                                    arguments: product);
+                              },
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 130,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.black12,
+                                              width: 0.5)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Image.network(product.images[0]),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: const EdgeInsets.only(
-                                      top: 5, left: 0, right: 15),
-                                  child: Text(
-                                    product.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    padding: const EdgeInsets.only(
+                                        top: 5, left: 0, right: 15),
+                                    child: Text(
+                                      product.name,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             );
                           }),
                     ),

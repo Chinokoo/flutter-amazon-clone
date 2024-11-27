@@ -11,6 +11,7 @@ class UserProvider extends ChangeNotifier {
     address: "",
     type: "",
     token: "",
+    cart: [],
   );
   //get the user variable to public
   User get user => _user;
