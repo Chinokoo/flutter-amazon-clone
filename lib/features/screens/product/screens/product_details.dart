@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/common/widgets/custom_button.dart';
 import 'package:flutter_amazon_clone/common/widgets/rating_bar.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/constants/utils.dart';
 import 'package:flutter_amazon_clone/features/admin/models/product_model.dart';
 import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
@@ -43,6 +44,18 @@ class _ProductDetailsState extends State<ProductDetails> {
   //navigate to search
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void addToCart() {
+    if (widget.product.quantity > 0) {
+      productservice.addToCart(context: context, product: widget.product);
+      setState(() {});
+      showSnackBar(
+          context: context, text: "added to cart!", snakBarColor: Colors.green);
+    } else {
+      showSnackBar(
+          context: context, text: "Out of Stock", snakBarColor: Colors.red);
+    }
   }
 
   @override
@@ -156,7 +169,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: RichText(
                 text: TextSpan(
                     text: "Price: ",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                     children: [
                       TextSpan(
@@ -167,6 +180,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                               fontWeight: FontWeight.w500))
                     ]),
               ),
+            ),
+
+            //description
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(widget.product.quantity < 10
+                  ? widget.product.quantity == 0
+                      ? "Out of Stock"
+                      : "less than 10 remaining"
+                  : "in stock"),
             ),
             //description
             Padding(
@@ -191,7 +214,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   text: "Add to Cart",
                   backgroundColor: Colors.yellow,
                   textColor: Colors.black,
-                  onTap: () {}),
+                  onTap: addToCart),
             ),
 
             //rate this product

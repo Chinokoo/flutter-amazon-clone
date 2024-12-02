@@ -45,7 +45,7 @@ class Product {
       price: map['price']?.toDouble() ?? 0.0,
       quantity: map['quantity']?.toInt() ?? 0,
       category: map['category'] ?? '',
-      images: List<String>.from(map['images']),
+      images: map['images'] != null ? List<String>.from(map['images']) : [],
       id: map['_id'] ?? '',
       userId: map['userId'] ?? '',
       rating: map['ratings'] != null

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
+import 'package:flutter_amazon_clone/common/widgets/custom_button.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/features/screens/cart/widgets/cart_product.dart';
+import 'package:flutter_amazon_clone/features/screens/cart/widgets/carts_total.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/address_box.dart';
-import 'package:flutter_amazon_clone/features/screens/home/widgets/carousel_image.dart';
-import 'package:flutter_amazon_clone/features/screens/home/widgets/deal_of_the_day.dart';
-import 'package:flutter_amazon_clone/features/screens/home/widgets/top_categories.dart';
 import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const routeName = '/home';
-  const HomeScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
   //function to navigate to search screen
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -88,23 +89,39 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            //address box widget
-            AddressBox(),
+            //address widget
+            const AddressBox(),
+            //total items in cart widget
+            //const CartsTotal(),
+            //proceed to buy
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomButton(
+                text: 'Proceed to buy (${user.cart.length})items',
+                onTap: () {},
+              ),
+            ),
             //sized box for spacing
-            SizedBox(height: 10),
-            //top categories
-            TopCategories(),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 1,
+              color: Colors.black12,
+            ),
             //sized box for spacing
-            SizedBox(height: 10),
-            //carousel image
-            CarouselImage(),
-            //sized box for spacing
-            SizedBox(height: 10),
-            //deal of the day.
-            DealOfTheDay(),
+            const SizedBox(
+              height: 5,
+            ),
+            ListView.builder(
+                itemCount: user.cart.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return CartProduct(index: index);
+                })
           ],
         ),
       ),

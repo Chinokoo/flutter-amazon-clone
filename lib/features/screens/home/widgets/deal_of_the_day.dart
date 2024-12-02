@@ -17,11 +17,6 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
   //initializing the home service
   HomeService homeService = HomeService();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   dealOfTheDay();
-  // }
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

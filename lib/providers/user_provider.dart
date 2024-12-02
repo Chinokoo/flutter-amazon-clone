@@ -20,4 +20,10 @@ class UserProvider extends ChangeNotifier {
     _user = User.fromJson(user);
     notifyListeners();
   }
+
+  //function to set user
+  void setUserFromModel(User user) {
+    _user = user;
+    notifyListeners();
+  }
 }

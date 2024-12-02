@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:flutter_amazon_clone/features/admin/services/admin_services.dart';
 import 'package:flutter_amazon_clone/features/screens/account/account_screen.dart';
+import 'package:flutter_amazon_clone/features/screens/cart/cart_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
+import 'package:flutter_amazon_clone/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/bottom_bar';
@@ -22,7 +26,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(child: Text("Cart")),
+    const CartScreen(),
   ];
 
 //function to update page index
@@ -34,6 +38,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLength = context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -94,7 +99,7 @@ class _BottomBarState extends State<BottomBar> {
                 child: badges.Badge(
                   badgeStyle: badges.BadgeStyle(badgeColor: Colors.transparent),
                   badgeContent: Text(
-                    "4",
+                    userCartLength.toString(),
                     style: TextStyle(
                         color: _page == 2
                             ? GlobalVariables.selectedNavBarColor

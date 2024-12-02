@@ -1,12 +1,10 @@
 const express = require("express");
 productRouter = express.Router();
-const Product = require("../models/product");
+const { Product } = require("../models/product");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const multer = require("multer");
 const path = require("path");
-const { error } = require("console");
-//const { upload } = require("../index");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
