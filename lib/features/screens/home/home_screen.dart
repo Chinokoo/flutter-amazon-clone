@@ -5,8 +5,6 @@ import 'package:flutter_amazon_clone/features/screens/home/widgets/carousel_imag
 import 'package:flutter_amazon_clone/features/screens/home/widgets/deal_of_the_day.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/top_categories.dart';
 import 'package:flutter_amazon_clone/features/screens/search/screens/search_screen.dart';
-import 'package:flutter_amazon_clone/providers/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';

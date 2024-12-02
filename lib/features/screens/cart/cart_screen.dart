@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter_amazon_clone/common/widgets/custom_button.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:flutter_amazon_clone/features/screens/cart/widgets/cart_product.dart';
@@ -95,7 +94,7 @@ class _CartScreenState extends State<CartScreen> {
             //address widget
             const AddressBox(),
             //total items in cart widget
-            //const CartsTotal(),
+            const CartsTotal(),
             //proceed to buy
             Padding(
               padding: const EdgeInsets.all(10),

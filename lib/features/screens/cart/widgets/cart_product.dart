@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/utils.dart';
 import 'package:flutter_amazon_clone/features/admin/models/product_model.dart';
-import 'package:flutter_amazon_clone/features/screens/cart/cart_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/product/screens/product_details.dart';
 import 'package:flutter_amazon_clone/providers/user_provider.dart';
 import 'package:flutter_amazon_clone/services/ProductService.dart';
@@ -38,6 +37,8 @@ class _CartProductState extends State<CartProduct> {
     final productCart = context.watch<UserProvider>().user.cart[widget.index];
     final product = Product.fromMap(productCart['product']);
     final quantity = productCart["quantity"];
+
+    final totalinPrice = productCart["quantity"] * product.price;
 
     void navigateToProductScreen() {
       Navigator.pushNamed(context, ProductDetails.routeName,
@@ -140,7 +141,8 @@ class _CartProductState extends State<CartProduct> {
                   ),
                 ],
               ),
-            )
+            ),
+            Text(totalinPrice.toString())
           ],
         ),
       )

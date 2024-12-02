@@ -7,9 +7,14 @@ class CartsTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final user = context.watch<UserProvider>().user;
-
+    final user = context.watch<UserProvider>().user;
+    final userCart = user.cart;
     int sum = 0;
+
+    for (int i = 0; i < userCart.length; i++) {
+      sum += userCart[i]['quantity'] * (userCart[i]['product']['price'].toInt())
+          as int;
+    }
 
     return Container(
       margin: const EdgeInsets.all(10),

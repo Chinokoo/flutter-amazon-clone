@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:flutter_amazon_clone/features/admin/services/admin_services.dart';
 import 'package:flutter_amazon_clone/features/screens/account/account_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/cart/cart_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
