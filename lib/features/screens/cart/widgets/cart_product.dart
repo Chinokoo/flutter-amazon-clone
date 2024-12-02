@@ -34,6 +34,7 @@ class _CartProductState extends State<CartProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<UserProvider>().user;
     final productCart = context.watch<UserProvider>().user.cart[widget.index];
     final product = Product.fromMap(productCart['product']);
     final quantity = productCart["quantity"];
@@ -41,11 +42,27 @@ class _CartProductState extends State<CartProduct> {
     final totalinPrice = productCart["quantity"] * product.price;
 
     void navigateToProductScreen() {
-      Navigator.pushNamed(context, ProductDetails.routeName,
-          arguments: product);
+      try {
+        if (user.cart.isEmpty) {
+          showSnackBar(
+            context: context,
+            text: "Your cart is empty!",
+            snakBarColor: Colors.orange,
+          );
+          return;
+        }
+        Navigator.pushNamed(context, ProductDetails.routeName,
+            arguments: product);
+      } catch (e) {
+        showSnackBar(
+          context: context,
+          text: "Something went wrong. Please try again.",
+          snakBarColor: Colors.red,
+        );
+      }
     }
 
-    return (Column(children: [
+    return (Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       GestureDetector(
         onTap: navigateToProductScreen,
         child: Container(
@@ -55,44 +72,47 @@ class _CartProductState extends State<CartProduct> {
               Image.network(
                 product.images.isNotEmpty ? product.images[0] : '',
                 fit: BoxFit.fitWidth,
-                width: 135,
-                height: 135,
+                width: 120,
+                height: 120,
               ),
-              Column(
-                children: [
-                  //product name
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      product.name,
-                      style: TextStyle(fontSize: 16),
-                      maxLines: 2,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //product name
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        product.name,
+                        style: TextStyle(fontSize: 16),
+                        maxLines: 2,
+                      ),
                     ),
-                  ),
-                  //product ratings
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(top: 5, left: 10),
-                  ),
-                  //product price
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(top: 5, left: 10),
-                    child: Text(
-                      '\$ ${product.price}',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                      maxLines: 2,
+                    //product ratings
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(top: 5, left: 10),
                     ),
-                  ),
-                  //Eligible Text
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Text("Eligible for FREE Shipping"),
-                  ),
-                ],
+                    //product price
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(top: 5, left: 10),
+                      child: Text(
+                        '\$ ${product.price}',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        maxLines: 2,
+                      ),
+                    ),
+                    //Eligible Text
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(left: 10),
+                      child: const Text("Eligible for FREE Shipping"),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
@@ -109,6 +129,7 @@ class _CartProductState extends State<CartProduct> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
                     onTap: () => increaseQuantity(product),

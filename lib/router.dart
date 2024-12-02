@@ -3,6 +3,7 @@ import 'package:flutter_amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter_amazon_clone/features/admin/models/product_model.dart';
 import 'package:flutter_amazon_clone/features/admin/screens/admin_add_products_screen/admin_add_products.dart';
 import 'package:flutter_amazon_clone/features/auth/screens/auth_screen.dart';
+import 'package:flutter_amazon_clone/features/screens/address/address_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/category_deals_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/home/home_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/product/screens/product_details.dart';
@@ -18,6 +19,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case AuthScreen.routeName:
       return MaterialPageRoute(
           settings: routeSettings, builder: (_) => const BottomBar());
+
+    //address screen
+    case AddressScreen.routeName:
+      return MaterialPageRoute(
+          settings: routeSettings, builder: (_) => AddressScreen());
 
     //home screen navigator
     case HomeScreen.routeName:

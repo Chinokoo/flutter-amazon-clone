@@ -23,9 +23,19 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
     dealOfTheDay();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    dealOfTheDay();
+  }
+
   void dealOfTheDay() async {
+    if (!mounted) return;
     product = await homeService.fetchDealOfTheDay(context: context);
-    setState(() {});
+    if (mounted) {
+      // Add this check
+      setState(() {});
+    }
   }
 
   void navigateToSearchScreen() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_amazon_clone/common/widgets/custom_button.dart';
 import 'package:flutter_amazon_clone/constants/global_variables.dart';
+import 'package:flutter_amazon_clone/features/screens/address/address_screen.dart';
 import 'package:flutter_amazon_clone/features/screens/cart/widgets/cart_product.dart';
 import 'package:flutter_amazon_clone/features/screens/cart/widgets/carts_total.dart';
 import 'package:flutter_amazon_clone/features/screens/home/widgets/address_box.dart';
@@ -100,7 +101,9 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: 'Proceed to buy (${user.cart.length})items',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AddressScreen.routeName);
+                },
               ),
             ),
             //sized box for spacing
